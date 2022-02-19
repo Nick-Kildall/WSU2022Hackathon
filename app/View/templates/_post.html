@@ -51,6 +51,10 @@
                     {% endif %}
                 </div>
             </td>
+            <div>
+                <!-- Button to view the comments for this post -->
+                <td><a href="{{ url_for('routes.viewcomments', post_id = post.id) }}" class = "button"> Post Comment </a></td>
+            </div>
         </tr>
         
         <tr> 

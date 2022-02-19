@@ -6,8 +6,8 @@ from flask_login import login_required, current_user
 from config import Config
 
 from app import db
-from app.Model.models import Post, Tag, postTags
-from app.Controller.forms import PostForm, SortForm
+from app.Model.models import Post, Tag, postTags, Comment
+from app.Controller.forms import PostForm, SortForm, CommentForm
 
 bp_routes = Blueprint('routes', __name__)
 bp_routes.template_folder = Config.TEMPLATE_FOLDER #'..\\View\\templates'
@@ -83,4 +83,23 @@ def delete(post_id):
     flash("Post succesfully deleted")
     return redirect(url_for("routes.index"))
 
+@bp_routes.route('/viewcomments/<post_id>', methods=['GET', 'POST'])
+@login_required
+def viewcomments(post_id):
+    posts = Post.query.filter_by(id=post_id)
+    comments = Comment.query.filter_by(post_id=post_id)
+    posts_count = Post.query.count()
+    return render_template('viewcomments.html', title="Comments for this post: ", posts=posts)
+
+@bp_routes.route('/comment/<post_id>', methods=['GET', 'POST'])
+@login_required
+def postcomment(post_id):
+    cform = CommentForm()
+    if cform.validate_on_submit():
+        newComment = Comment(text = cform.body.data, likes = 0, user_id = current_user.id, post_id = post_id)
+        db.session.add(newComment)
+        db.session.commit()
+        flash('Comment has been submitted!')
+        return redirect(url_for('routes.index'))
+    return render_template('comment.html', form = cform)
     
