@@ -1,1 +1,2 @@
-# WSU2022Hackathon
+Nick Kildall
+Computer Science
