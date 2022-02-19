@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1>Post New Comment</h1>
+
+    {% if form %}
+
+        <form action="" method="post">
+            {{ form.hidden_tag() }}
+            <div>
+                <p>{{ form.body.label }}</p>
+                <p>{{ form.body(class="formbody") }}</p>
+                <!-- TODO: (milestone1) Include the form item for the post's `body`. Apply appropriate styling for the `body`form  item.  -->  
+                {%for error in form.body.errors %}
+                <span style="color: red">[{{error}}]</span>
+                {% endfor %}
+                <!-- TODO: (milestone 1) Display the error messages of the `body` field validator (if there are any validation errors).   -->  
+            </div>
+            {{ form.submit(class="button") }}
+        </form>
+    {% endif %}
+
+
+  {% endblock %}

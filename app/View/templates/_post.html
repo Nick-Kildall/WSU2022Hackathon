@@ -4,17 +4,6 @@
             </td>
         </tr>
         <tr>
-            <td width="10%" >
-                <!--  (milestone1) TODO: include happiness-level image according to the `cost`s happiness_level .
-                For example : <img src="{{ url_for('static', filename = 'img//happiness-level-1.png' )}}"-->  
-                {% if post.happiness_level == 1 %}
-                    <img src="{{ url_for('static', filename = 'img//happiness-level-1.png' )}}" width="40"> 
-                {% elif post.happiness_level == 2 %}
-                    <img src="{{ url_for('static', filename = 'img//happiness-level-2.png' )}}" width="40">    
-                {% elif post.happiness_level == 3 %}
-                    <img src="{{ url_for('static', filename = 'img//happiness-level-3.png' )}}" width="40">
-                {% endif %}
-            </td>
 
             <td width="80%">
                 <div class = "postmessage">

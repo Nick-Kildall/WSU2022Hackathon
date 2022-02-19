@@ -18,11 +18,9 @@ def get_posts(sortForm):
         return Post.query.order_by(Post.timestamp.desc())
     if sortnum == 2:
         return Post.query.order_by(Post.title.desc())
-    elif sortnum == 3:
-        return Post.query.order_by(Post.likes.desc())
     else:
-        return Post.query.order_by(Post.happiness_level.desc())
-        
+        return Post.query.order_by(Post.likes.desc())
+
 
 @bp_routes.route('/', methods=['GET'])
 @bp_routes.route('/index', methods=['GET', 'POST'])
@@ -44,7 +42,7 @@ def postsmile():
     postForm = PostForm()
     if postForm.validate_on_submit():
         newPost = Post(title = postForm.title.data, 
-            user_id = current_user.id, happiness_level = postForm.happiness_level.data,
+            user_id = current_user.id,
             body = postForm.body.data)
         for tempTag in postForm.tag.data:
             newPost.tags.append(tempTag)
@@ -89,9 +87,9 @@ def viewcomments(post_id):
     posts = Post.query.filter_by(id=post_id)
     comments = Comment.query.filter_by(post_id=post_id)
     posts_count = Post.query.count()
-    return render_template('viewcomments.html', title="Comments for this post: ", posts=posts)
+    return render_template('viewcomments.html', title="Comments for this post: ", posts=posts, comments = comments)
 
-@bp_routes.route('/comment/<post_id>', methods=['GET', 'POST'])
+@bp_routes.route('/postcomment/<post_id>', methods=['GET', 'POST'])
 @login_required
 def postcomment(post_id):
     cform = CommentForm()
@@ -101,5 +99,5 @@ def postcomment(post_id):
         db.session.commit()
         flash('Comment has been submitted!')
         return redirect(url_for('routes.index'))
-    return render_template('comment.html', form = cform)
+    return render_template('postcomment.html', form = cform)
     
