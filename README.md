@@ -1,2 +1,1 @@
-Nick Kildall
-Computer Science
+# WAZZU MOB
