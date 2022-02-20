@@ -22,3 +22,9 @@ Team Members:
 Eric
 Sejal
 Nick
+
+### Video Demo
+
+
+https://user-images.githubusercontent.com/72421411/154838759-1cc39bb0-d191-4579-b206-1a6254db2fa5.mp4
+
