@@ -26,8 +26,6 @@ def get_posts(sortForm):
         return Post.query.filter(Post.tags.any(name = "WSU Club Events"))
     if sortnum == 5: 
         return Post.query.filter(Post.tags.any(name = "Open to All"))
-    if sortnum == 6: 
-        return Post.query.filter(Post.tags.any(name = "Friendship"))
     else: 
         return Post.query.order_by(Post.likes.desc())
 

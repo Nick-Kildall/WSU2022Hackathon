@@ -28,6 +28,6 @@ class CommentForm(FlaskForm):
     submit = SubmitField('Post')
 
 class SortForm(FlaskForm):
-    sortby = SelectField('Sort By', choices = [(1,' Date'),(2, 'Official WSU Events'),(3, 'Greek Row Events'), (4, 'WSU-Club-Events'), (5, 'Open-to-All'),(6, 'Friendship'),(7, '#-of-upvotes')])
+    sortby = SelectField('Sort By', choices = [(1,' Date'),(2, 'Official WSU Events'),(3, 'Greek Row Events'), (4, 'WSU-Club-Events'), (5, 'Open-to-All'),(6, '#-of-upvotes')])
     myposts = BooleanField('Display my posts only')
     submit = SubmitField('Refresh')
