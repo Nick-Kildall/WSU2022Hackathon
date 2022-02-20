@@ -4,7 +4,7 @@
 
 ```bash
 git clone -b Sejal https://github.com/Nick-Kildall/WSU2022Hackathon.git
-cd WSU2020Hackathon
+cd WSU2022Hackathon
 pip install -r requirements.txt
 flask run
 ```
