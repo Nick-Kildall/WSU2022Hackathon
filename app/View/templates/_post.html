@@ -6,24 +6,43 @@
 <!--             <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
                 <image href="../static/img/like.png" height="200" width="200"/>
             </svg> -->
+        {%if post.image_number == 1 %}    
+          <img src="../static/img/pic1.jpeg" class="card-img-top">
+        {%elif post.image_number == 2%}
+          <img src="../static/img/pic2.jpeg" class="card-img-top"> 
+        {% elif post.image_number == 3 %}
+          <img src="../static/img/pic3.jpeg" class="card-img-top">
+        {% else %}
+          <img src="../static/img/pic4.jpeg" class="card-img-top">
+        {% endif %}
+
+        <div style = "display: flex; justify-content: space-evenly;">
+          {%for tag in post.tags%}
+          
+            <button class = "btn btn-secondary" style = "background-color: rgb(250, 250, 250); color: black;"> {{ tag.name }} </span>
             
-        <img src="../static/img/like.png" class="card-img-top">
-            
-            
+              {% endfor %}
+      </div> 
+
 
           <div class="card-body">
             <p class="fw-bold" > {{ post.title }} </p> 
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
+            <p class="card-text">{{post.body}}</p>
+            <div style ="display: flex; justify-content: space-evenly;">
+              <div>
                 <form action="{{ url_for('routes.like', post_id = post.id) }}" method="POST">
                 <button type="submit" class="btn btn-sm btn-outline-secondary">👍</button>
                 </form>
-                 <form action="{{ url_for('routes.like', post_id = post.id) }}" method="POST">
-                <button type="submit" class="btn btn-sm btn-outline-secondary">View Comments</button>
-                </form></div>
-              <small class="text-muted">Likes: {{post.likes}}</small>
-            </div>
+              </div>
+              <div>
+                <form action="{{ url_for('routes.viewcomments', post_id = post.id) }}" method="POST">
+                <button type="submit" class="btn btn-sm btn-outline-secondary" >View Comments</button>
+                </form>
+              </div>
+              <div>
+                <small class="text-muted">Likes: {{post.likes}}</small>
+              </div>
+
           </div>
         </div>
       </div>

@@ -43,7 +43,7 @@ def login():
     print("In login")
     return render_template("login.html", title = "Sign In", form = lform)
 
-@bp_auth.route("/logout", methods = ["GET"])
+@bp_auth.route("/logout", methods = ["POST"])
 @login_required
 def logout():
     logout_user()

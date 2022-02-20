@@ -26,10 +26,10 @@ class Post(db.Model):
         primaryjoin=(postTags.c.post_id == id),
         backref=db.backref('postTags',
         lazy='dynamic'), lazy='dynamic')
+    image_number = db.Column(db.Integer,default = 3)
 
     def get_tags(self):
         return self.tags
-
 
 class Tag(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -64,5 +64,8 @@ class Comment(db.Model):
     likes = db.Column(db.Integer, default = 0) 
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+    user_name = db.Column(db.String(64))
     post_id = db.Column(db.Integer, db.ForeignKey('post.id'), nullable=False)
+
 

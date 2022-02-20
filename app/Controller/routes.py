@@ -1,4 +1,6 @@
 from __future__ import print_function
+from operator import contains
+from random import randint
 import sys
 from flask import Blueprint
 from flask import render_template, flash, redirect, url_for, request
@@ -17,10 +19,15 @@ def get_posts(sortForm):
     if sortnum == 1:
         return Post.query.order_by(Post.timestamp.desc())
     if sortnum == 2:
-        return Post.query.order_by(Post.title.desc())
-    else:
+        return Post.query.filter(Post.tags.any(name = "Official WSU Events"))
+    if sortnum == 3: 
+        return Post.query.filter(Post.tags.any(name = "Official WSU Events"))
+    if sortnum == 4: 
+        return Post.query.filter(Post.tags.any(name = "Official WSU Events"))
+    if sortnum == 5: 
+        return Post.query.filter(Post.tags.any(name = "Official WSU Events"))
+    else: 
         return Post.query.order_by(Post.likes.desc())
-
 
 @bp_routes.route('/', methods=['GET'])
 @bp_routes.route('/index', methods=['GET', 'POST'])
@@ -43,7 +50,7 @@ def postevent():
     if postForm.validate_on_submit():
         newPost = Post(title = postForm.title.data, 
             user_id = current_user.id,
-            body = postForm.body.data)
+            body = postForm.body.data, image_number = randint(1,4))
         for tempTag in postForm.tag.data:
             newPost.tags.append(tempTag)
         db.session.add(newPost)
@@ -95,10 +102,11 @@ def viewcomments(post_id):
 def postcomment(post_id):
     cform = CommentForm()
     if cform.validate_on_submit():
-        newComment = Comment(text = cform.body.data, likes = 0, user_id = current_user.id, post_id = post_id)
+        newComment = Comment(text = cform.body.data, likes = 0, user_id = current_user.id, user_name = current_user.username, post_id = post_id)
         db.session.add(newComment)
         db.session.commit()
         flash('Comment has been submitted!')
-        return redirect(url_for('routes.index'))
+        return redirect(url_for('routes.viewcomments', post_id = post_id))
     return render_template('postcomment.html', form = cform)
+    
     
