@@ -20,7 +20,7 @@ class Post(db.Model):
     title = db.Column(db.String(150))
     body = db.Column(db.String(1500))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
-    likes = db.Column(db.Integer)
+    likes = db.Column(db.Integer, default = 0)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     tags = db.relationship("Tag", secondary = postTags,
         primaryjoin=(postTags.c.post_id == id),

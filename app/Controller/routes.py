@@ -36,9 +36,9 @@ def index():
         posts = Post.query.order_by(Post.timestamp.desc())
     return render_template('index.html', title="Smile Portal", posts=posts.all(), sform = sortForm)
 
-@bp_routes.route('/postsmile', methods=['GET', 'POST'])
+@bp_routes.route('/postevent', methods=['GET', 'POST'])
 @login_required
-def postsmile():
+def postevent():
     postForm = PostForm()
     if postForm.validate_on_submit():
         newPost = Post(title = postForm.title.data, 
@@ -50,6 +50,7 @@ def postsmile():
         db.session.commit()
         flash("Post " + newPost.title + " is created")
         return redirect(url_for('routes.index')) 
+    print("In post event")
     return render_template("create.html", form = postForm)
 
 @bp_routes.route('/like/<post_id>', methods=['POST'])

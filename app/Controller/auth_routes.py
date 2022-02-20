@@ -40,6 +40,7 @@ def login():
             return redirect(url_for("auth.login"))
         login_user(user, remember = lform.remember_me.data)
         return redirect(url_for("routes.index"))
+    print("In login")
     return render_template("login.html", title = "Sign In", form = lform)
 
 @bp_auth.route("/logout", methods = ["GET"])
