@@ -41,7 +41,7 @@ def index():
             posts = get_posts(sortForm)
     else:
         posts = Post.query.order_by(Post.timestamp.desc())
-    return render_template('index.html', title="Smile Portal", posts=posts.all(), sform = sortForm)
+    return render_template('index.html', title="Wazzu Mob", posts=posts.all(), sform = sortForm)
 
 @bp_routes.route('/postevent', methods=['GET', 'POST'])
 @login_required
@@ -109,4 +109,6 @@ def postcomment(post_id):
         return redirect(url_for('routes.viewcomments', post_id = post_id))
     return render_template('postcomment.html', form = cform)
     
-    
+@bp_routes.route('/todo', methods=['GET'])
+def todo():
+    return render_template('todo.html')
