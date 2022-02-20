@@ -21,6 +21,8 @@ class PostForm(FlaskForm):
         widget=ListWidget(prefix_label=False),
         option_widget=CheckboxInput() )
     body = TextAreaField("Body", validators=[DataRequired(),Length(min = 1, max = 1500)])
+    location = TextAreaField("Location", validators=[DataRequired(),Length(min = 1, max = 150)])
+    timing = TextAreaField("Timing", validators=[DataRequired(),Length(min = 1, max = 150)])
     submit = SubmitField('Post')
     
 class CommentForm(FlaskForm):

@@ -21,11 +21,11 @@ def get_posts(sortForm):
     if sortnum == 2:
         return Post.query.filter(Post.tags.any(name = "Official WSU Events"))
     if sortnum == 3: 
-        return Post.query.filter(Post.tags.any(name = "Official WSU Events"))
+        return Post.query.filter(Post.tags.any(name = "Greek Row Events"))
     if sortnum == 4: 
-        return Post.query.filter(Post.tags.any(name = "Official WSU Events"))
+        return Post.query.filter(Post.tags.any(name = "WSU Club Events"))
     if sortnum == 5: 
-        return Post.query.filter(Post.tags.any(name = "Official WSU Events"))
+        return Post.query.filter(Post.tags.any(name = "Open to All"))
     else: 
         return Post.query.order_by(Post.likes.desc())
 
@@ -50,7 +50,7 @@ def postevent():
     if postForm.validate_on_submit():
         newPost = Post(title = postForm.title.data, 
             user_id = current_user.id,
-            body = postForm.body.data, image_number = randint(1,4))
+            body = postForm.body.data, image_number = randint(1,4),timing = postForm.timing.data, location = postForm.location.data)
         for tempTag in postForm.tag.data:
             newPost.tags.append(tempTag)
         db.session.add(newPost)

@@ -27,7 +27,8 @@ class Post(db.Model):
         backref=db.backref('postTags',
         lazy='dynamic'), lazy='dynamic')
     image_number = db.Column(db.Integer,default = 3)
-
+    location = db.Column(db.String(150))
+    timing = db.Column(db.String(150))
     def get_tags(self):
         return self.tags
 

@@ -28,6 +28,10 @@
           <div class="card-body">
             <p class="fw-bold" > {{ post.title }} </p> 
             <p class="card-text">{{post.body}}</p>
+            <p class="posttitle" > <u> Location: {{ post.location }} </u></p> 
+            <p class="posttitle" ><u>Timing: {{ post.timing }}</u> </p> 
+
+            
             <div style ="display: flex; justify-content: space-evenly;">
               <div>
                 <form action="{{ url_for('routes.like', post_id = post.id) }}" method="POST">

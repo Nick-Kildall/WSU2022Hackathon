@@ -8,7 +8,7 @@ app = create_app()
 def initDB(*args, **kwargs):
     db.create_all()
     if Tag.query.count() == 0:
-        tags = ['Official WSU Events','Greek Row Events', 'WSU Club Events', 'Open to All', 'friendship']
+        tags = ['Official WSU Events','Greek Row Events', 'WSU Club Events', 'Open to All']
         for t in tags:
             db.session.add(Tag(name=t))
         db.session.commit()
